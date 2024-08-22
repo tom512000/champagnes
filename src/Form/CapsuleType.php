@@ -24,7 +24,7 @@ class CapsuleType extends AbstractType
             ->add('decoration', TextType::class, ['required' => false])
             ->add('lieu', TextType::class, ['required' => false])
             ->add('taille', TextType::class)
-            ->add('muselet', CheckboxType::class, ['required' => false])
+            ->add('coffret', CheckboxType::class, ['required' => false])
             ->add('prix', NumberType::class, ['scale' => 2, 'required' => false])
             ->add('etat', TextType::class)
             ->add('image', FileType::class, [

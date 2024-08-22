@@ -38,7 +38,7 @@ class Capsule
     private string $taille; // "petit" ou "normal"
 
     #[ORM\Column(type: "boolean")]
-    private string $muselet; // true ou false
+    private string $coffret; // true ou false
 
     #[ORM\Column(type: "float", scale: 2, nullable: true)]
     private ?float $prix = 0.0;
@@ -150,14 +150,14 @@ class Capsule
         return $this;
     }
 
-    public function getMuselet(): bool
+    public function getCoffret(): bool
     {
-        return $this->muselet;
+        return $this->coffret;
     }
 
-    public function setMuselet(bool $muselet): static
+    public function setCoffret(bool $coffret): static
     {
-        $this->muselet = $muselet;
+        $this->coffret = $coffret;
 
         return $this;
     }

@@ -91,7 +91,7 @@ class CapsuleController extends AbstractController
 
         return $this->render('capsule/edit.html.twig', [
             'form' => $form->createView(),
-            'user' => $capsule,
+            'capsule' => $capsule,
         ]);
     }
 
