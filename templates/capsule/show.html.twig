@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Capsule{% endblock %}
+
+{% block body %}
+    <h1>Capsule</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Image</th>
+                <td>
+                    {% if capsule.image is null %}
+                        <img src="{{ asset('img/default_image.jpg') }}" alt="Aucune photo disponible">
+                    {% else %}
+                        <img src="{{ asset('upload/' ~ capsule.image) }}" alt="Photo de la capsule">
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ capsule.id }}</td>
+            </tr>
+            <tr>
+                <th>Producteur</th>
+                <td>{{ capsule.producteur }}</td>
+            </tr>
+            <tr>
+                <th>Embleme</th>
+                <td>{{ capsule.embleme }}</td>
+            </tr>
+            <tr>
+                <th>Couleur</th>
+                <td>{{ capsule.couleur }}</td>
+            </tr>
+            <tr>
+                <th>Matiere</th>
+                <td>{{ capsule.matiere }}</td>
+            </tr>
+            <tr>
+                <th>Inscription</th>
+                <td>{{ capsule.inscription }}</td>
+            </tr>
+            <tr>
+                <th>Decoration</th>
+                <td>{{ capsule.decoration }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ capsule.lieu }}</td>
+            </tr>
+            <tr>
+                <th>Taille</th>
+                <td>{{ capsule.taille }}</td>
+            </tr>
+            <tr>
+                <th>Muselet</th>
+                <td>{{ capsule.muselet ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ capsule.prix }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ capsule.etat }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_capsule_index') }}">back to list</a>
+
+    <a href="{{ path('app_capsule_edit', {'id': capsule.id}) }}">edit</a>
+
+    {{ include('capsule/_delete_form.html.twig') }}
+{% endblock %}

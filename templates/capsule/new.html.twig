@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Capsule{% endblock %}
+
+{% block body %}
+    <h1>Create new Capsule</h1>
+
+    {{ include('capsule/_form.html.twig') }}
+
+    <a href="{{ path('app_capsule_index') }}">back to list</a>
+{% endblock %}

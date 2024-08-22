@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Capsule index{% endblock %}
+
+{% block body %}
+    <h1>Capsule index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Producteur</th>
+                <th>Embleme</th>
+                <th>Couleur</th>
+                <th>Matiere</th>
+                <th>Inscription</th>
+                <th>Decoration</th>
+                <th>Lieu</th>
+                <th>Taille</th>
+                <th>Muselet</th>
+                <th>Prix</th>
+                <th>Etat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for capsule in capsules %}
+            <tr>
+                <td>
+                    {% if capsule.image is null %}
+                        <img src="{{ asset('img/default_image.jpg') }}" alt="Aucune photo disponible">
+                    {% else %}
+                        <img src="{{ asset('upload/' ~ capsule.image) }}" alt="Photo de la capsule">
+                    {% endif %}
+                </td>
+                <td>{{ capsule.producteur }}</td>
+                <td>{{ capsule.embleme }}</td>
+                <td>{{ capsule.couleur }}</td>
+                <td>{{ capsule.matiere }}</td>
+                <td>{{ capsule.inscription }}</td>
+                <td>{{ capsule.decoration }}</td>
+                <td>{{ capsule.lieu }}</td>
+                <td>{{ capsule.taille }}</td>
+                <td>{{ capsule.muselet ? 'Yes' : 'No' }}</td>
+                <td>{{ capsule.prix }}</td>
+                <td>{{ capsule.etat }}</td>
+                <td>
+                    <a href="{{ path('app_capsule_show', {'id': capsule.id}) }}">show</a>
+                    <a href="{{ path('app_capsule_edit', {'id': capsule.id}) }}">edit</a>
+                    <a href="{{ path('app_capsule_delete', {'id': capsule.id}) }}">delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_capsule_new') }}">Create new</a>
+{% endblock %}
