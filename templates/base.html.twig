@@ -4,6 +4,9 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -12,11 +15,23 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
-        <form action="{{ path('app_capsule_index') }}" method="get">
-            <input type="text" name="search" aria-label="" placeholder="Rechercher...">
-            <button type="submit">Rechercher</button>
-        </form>
+    <body class="w-full bg-middle-gray">
+        <header class="bg-white">
+            <div class="mx-32 py-4">
+                <div class="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
+                    <div>
+                        <h1 class="text-2xl font-bold font-lexend text-gray-900 sm:text-3xl">Bienvenue sur ma collection de capsules de champagne !</h1>
+
+                        <p class="mt-1.5 font-dmsans text-sm text-gray-500">Explorez une galerie unique de capsules rares et précieuses, avec des détails sur chaque pièce.</p>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        {% block search %}{% endblock %}
+                        <a type="button" href="{{ path('app_capsule_new') }}" class="inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white font-lexend transition hover:bg-indigo-700 focus:outline-none focus:ring">Ajouter une capsule</a>
+                    </div>
+                </div>
+            </div>
+        </header>
         {% block body %}{% endblock %}
     </body>
 </html>

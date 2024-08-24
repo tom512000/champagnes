@@ -5,7 +5,22 @@ module.exports = {
     "./templates/**/*.html.twig",
   ],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        '10': '2.5rem',
+      },
+      width: {
+        '10': '2.5rem',
+      },
+      colors: {
+        'light-gray': '#f9fafb',
+        'middle-gray': '#f3f4f6',
+      },
+      fontFamily: {
+        lexend: ['Lexend', 'sans-serif'],
+        dmsans: ['DM Sans', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }
