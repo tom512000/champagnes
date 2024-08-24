@@ -38,13 +38,16 @@ class Capsule
     private string $taille; // "petit" ou "normal"
 
     #[ORM\Column(type: "boolean")]
-    private string $coffret; // true ou false
+    private bool $coffret = false; // true ou false
 
     #[ORM\Column(type: "float", scale: 2, nullable: true)]
     private ?float $prix = 0.0;
 
-    #[ORM\Column(length: 1, options: ["unsigned" => true])]
+    #[ORM\Column(type: "integer", length: 1)]
     private int $etat; // Entre 1 et 5
+
+    #[ORM\Column(type: "integer", length: 1)]
+    private int $quantite;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image;
@@ -54,7 +57,7 @@ class Capsule
         return $this->id;
     }
 
-    public function getProducteur(): string
+    public function getProducteur(): ?string
     {
         return $this->producteur;
     }
@@ -182,6 +185,18 @@ class Capsule
     public function setEtat(int $etat): static
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getQuantite(): int
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite(int $quantite): static
+    {
+        $this->quantite = $quantite;
 
         return $this;
     }

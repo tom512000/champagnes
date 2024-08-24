@@ -30,8 +30,6 @@ class CapsuleRepository extends ServiceEntityRepository
             ->orWhere('c.decoration LIKE :query')
             ->orWhere('c.lieu LIKE :query')
             ->orWhere('c.taille LIKE :query')
-            ->orWhere('c.prix LIKE :query')
-            ->orWhere('c.etat LIKE :query')
             ->setParameter('query', '%' . $query . '%')
             ->getQuery()
             ->getResult();

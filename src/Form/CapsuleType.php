@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Capsule;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -16,7 +17,7 @@ class CapsuleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('producteur', TextType::class)
+            ->add('producteur', TextType::class, ['required' => false])
             ->add('embleme', TextType::class, ['required' => false])
             ->add('couleur', TextType::class)
             ->add('matiere', TextType::class, ['required' => false])
@@ -27,6 +28,7 @@ class CapsuleType extends AbstractType
             ->add('coffret', CheckboxType::class, ['required' => false])
             ->add('prix', NumberType::class, ['scale' => 2, 'required' => false])
             ->add('etat', TextType::class)
+            ->add('quantite', IntegerType::class)
             ->add('image', FileType::class, [
                 'label' => 'Image file',
                 'mapped' => false,
