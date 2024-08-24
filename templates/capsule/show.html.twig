@@ -3,74 +3,91 @@
 {% block title %}Capsule{% endblock %}
 
 {% block body %}
-    <h1>Capsule</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Image</th>
-                <td>
+    <div class="flex flex-col mx-32 mt-12">
+        <div class=" overflow-x-auto">
+            <article class="rounded-xl bg-white p-4 ring ring-indigo-50 sm:p-6 lg:p-8">
+                <div class="flex items-start sm:gap-8">
                     {% if capsule.image is null %}
-                        <img src="{{ asset('img/default_image.jpg') }}" alt="Aucune photo disponible">
+                        <img src="{{ asset('img/default_image.jpg') }}" alt="Aucune photo disponible" class="hidden sm:grid sm:size-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-indigo-500">
                     {% else %}
-                        <img src="{{ asset('upload/' ~ capsule.image) }}" alt="Photo de la capsule">
+                        <img src="{{ asset('upload/' ~ capsule.image) }}" alt="Photo de la capsule" class="hidden sm:grid sm:size-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-indigo-500">
                     {% endif %}
-                </td>
-            </tr>
-            <tr>
-                <th>Id</th>
-                <td>{{ capsule.id }}</td>
-            </tr>
-            <tr>
-                <th>Producteur</th>
-                <td>{{ capsule.producteur }}</td>
-            </tr>
-            <tr>
-                <th>Embleme</th>
-                <td>{{ capsule.embleme }}</td>
-            </tr>
-            <tr>
-                <th>Couleur</th>
-                <td>{{ capsule.couleur }}</td>
-            </tr>
-            <tr>
-                <th>Matiere</th>
-                <td>{{ capsule.matiere }}</td>
-            </tr>
-            <tr>
-                <th>Inscription</th>
-                <td>{{ capsule.inscription }}</td>
-            </tr>
-            <tr>
-                <th>Decoration</th>
-                <td>{{ capsule.decoration }}</td>
-            </tr>
-            <tr>
-                <th>Lieu</th>
-                <td>{{ capsule.lieu }}</td>
-            </tr>
-            <tr>
-                <th>Taille</th>
-                <td>{{ capsule.taille }}</td>
-            </tr>
-            <tr>
-                <th>Coffret</th>
-                <td>{{ capsule.coffret ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ capsule.prix }}</td>
-            </tr>
-            <tr>
-                <th>Etat</th>
-                <td>{{ capsule.etat }}</td>
-            </tr>
-        </tbody>
-    </table>
+                    <div>
+                        <strong class="rounded border border-indigo-500 bg-indigo-500 px-3 py-1.5 text-[10px] font-medium text-white">Identifiant {{ capsule.id }}</strong>
+                        <h3 class="mt-4 text-lg font-lexend font-medium sm:text-xl">
+                            {% if capsule.producteur is not null %}
+                                {{ capsule.producteur }} -
+                            {% else %}
+                                Pas de producteur -
+                            {% endif %}
+                            {% if capsule.lieu is not null %}
+                                {{ capsule.lieu }}
+                            {% else %}
+                                Pas de lieu
+                            {% endif %}
+                        </h3>
 
-    <a href="{{ path('app_capsule_index') }}">back to list</a>
+                        <p class="mt-1 text-sm font-dmsans text-gray-700">
+                            {% if capsule.embleme is not null %}
+                                {{ capsule.embleme }} -
+                            {% else %}
+                                Pas d'emblème -
+                            {% endif %}
+                            {{ capsule.couleur }} -
+                            {% if capsule.matiere is not null %}
+                                {{ capsule.matiere }} -
+                            {% else %}
+                                Pas de matériau -
+                            {% endif %}
+                            {% if capsule.inscription is not null %}
+                                {{ capsule.inscription }} -
+                            {% else %}
+                                Pas d'inscription -
+                            {% endif %}
+                            {% if capsule.decoration is not null %}
+                                {{ capsule.decoration }} -
+                            {% else %}
+                                Pas de décoration -
+                            {% endif %}
+                            Taille {{ capsule.taille }} -
+                            {{ capsule.coffret ? 'Dans un coffret' : 'Pas dans un coffret' }} -
+                            {% if capsule.prix != 0 %}
+                                {{ capsule.prix }} euro(s) -
+                            {% else %}
+                                Pas de prix -
+                            {% endif %}
+                            État {{ capsule.etat }}.
+                        </p>
 
-    <a href="{{ path('app_capsule_edit', {'id': capsule.id}) }}">edit</a>
+                        <div class="mt-4 sm:flex sm:items-center sm:gap-2">
+                            <div class="flex items-center gap-1 text-gray-500">
+                                <p class="text-xs font-medium">{{ capsule.quantite }} capsule(s)</p>
+                            </div>
 
-    {{ include('capsule/_delete_form.html.twig') }}
+                            <span class="hidden sm:block" aria-hidden="true">&middot;</span>
+
+                            <div class="flex mt-2 text-xs font-medium text-gray-500 sm:mt-0">
+                                <a href="{{ path('app_capsule_edit', {'id': capsule.id}) }}" class="mr-3 text-indigo-500 hover:underline transition-all duration-300">Modifier</a>
+                                <form method="post" action="{{ path('app_capsule_delete', {'id': capsule.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer la capsule ?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ capsule.id) }}">
+                                    <button class="text-red-600 hover:underline transition-all duration-300">
+                                        Supprimer
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <div class="flex flex-col mx-32 mt-5">
+        <div class=" overflow-x-auto">
+            <a href="{{ path('app_capsule_index') }}" class="inline-flex items-center rounded border border-indigo-600 px-4 py-3 text-indigo-600 hover:bg-indigo-600 hover:text-white focus:outline-none focus:ring active:bg-indigo-500">
+                <i class='bx bx-arrow-back mr-3'></i>
+                <span class="text-sm font-medium font-lexend">Revenir à l'accueil</span>
+            </a>
+        </div>
+    </div>
 {% endblock %}
