@@ -7,6 +7,7 @@ use App\Form\CapsuleType;
 use App\Repository\CapsuleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,13 +36,15 @@ class CapsuleController extends AbstractController
     }
 
     #[Route('/new', name: 'app_capsule_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $capsule = new Capsule();
         $form = $this->createForm(CapsuleType::class, $capsule);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->extracted($form, $slugger, $capsule);
+
             $entityManager->persist($capsule);
             $entityManager->flush();
 
@@ -69,20 +72,7 @@ class CapsuleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $image = $form->get('image')->getData();
-
-            if ($image) {
-                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
-
-                $image->move(
-                    $this->getParameter('images_directory'),
-                    $newFilename
-                );
-
-                $capsule->setImage($newFilename);
-            }
+            $this->extracted($form, $slugger, $capsule);
 
             $entityManager->flush();
 
@@ -104,5 +94,29 @@ class CapsuleController extends AbstractController
         }
 
         return $this->redirectToRoute('app_capsule_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @param FormInterface $form
+     * @param SluggerInterface $slugger
+     * @param Capsule $capsule
+     * @return void
+     */
+    public function extracted(FormInterface $form, SluggerInterface $slugger, Capsule $capsule): void
+    {
+        $image = $form->get('image')->getData();
+
+        if ($image) {
+            $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+            $safeFilename = $slugger->slug($originalFilename);
+            $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
+
+            $image->move(
+                $this->getParameter('images_directory'),
+                $newFilename
+            );
+
+            $capsule->setImage($newFilename);
+        }
     }
 }
