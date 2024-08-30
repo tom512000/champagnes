@@ -41,9 +41,9 @@
                                     <td class="px-5 py-3">
                                         <div class="w-24 h-24 flex items-center">
                                             {% if capsule.image is null %}
-                                                <img src="{{ asset('img/default_image.jpg') }}" alt="Aucune photo disponible">
+                                                <img src="{{ asset('img/default_image.jpg') }}" alt="Aucune photo disponible" class="rounded-full">
                                             {% else %}
-                                                <img src="{{ asset('upload/' ~ capsule.image) }}" alt="Photo de la capsule">
+                                                <img src="{{ asset('upload/' ~ capsule.image) }}" alt="Photo de la capsule" class="rounded-full">
                                             {% endif %}
                                         </div>
                                     </td>

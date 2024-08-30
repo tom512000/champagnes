@@ -63,9 +63,7 @@
                             <div class="flex items-center gap-1 text-gray-500">
                                 <p class="text-xs font-medium">{{ capsule.quantite }} capsule(s)</p>
                             </div>
-
                             <span class="hidden sm:block" aria-hidden="true">&middot;</span>
-
                             <div class="flex mt-2 text-xs font-medium text-gray-500 sm:mt-0">
                                 <a href="{{ path('app_capsule_edit', {'id': capsule.id}) }}" class="mr-3 text-indigo-500 hover:underline transition-all duration-300">Modifier</a>
                                 <form method="post" action="{{ path('app_capsule_delete', {'id': capsule.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer la capsule ?');">
@@ -84,7 +82,7 @@
 
     <div class="flex flex-col mx-32 mt-5">
         <div class=" overflow-x-auto">
-            <a href="{{ path('app_capsule_index') }}" class="inline-flex items-center rounded border border-indigo-600 px-4 py-3 text-indigo-600 hover:bg-indigo-600 hover:text-white focus:outline-none focus:ring active:bg-indigo-500">
+            <a href="{{ path('app_capsule_index') }}" class="inline-flex items-center rounded border border-indigo-600 px-4 py-3 text-indigo-600 hover:bg-indigo-600 hover:text-white active:bg-indigo-500">
                 <i class='bx bx-arrow-back mr-3'></i>
                 <span class="text-sm font-medium font-lexend">Revenir à l'accueil</span>
             </a>
