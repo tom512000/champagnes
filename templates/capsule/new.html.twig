@@ -1,9 +1,100 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Create new Capsule</h1>
+    <div class="flex flex-col mx-32 my-12">
+        <div class="overflow-x-auto">
+            <div class="w-full flex flex-col items-center">
+                <h1 class="font-lexend text-3xl font-bold mb-4">Nouvelle capsule</h1>
+                {{ form_start(form) }}
+                    <div class="w-96 col-span-6 sm:col-span-3 mt-4">
+                        {{ form_label(form.producteur, 'Producteur', {'label_attr': {'class': 'block text-sm font-dmsans font-semibold text-gray-700'}}) }}
+                        {{ form_widget(form.producteur, {'attr': {'class': 'mt-1 pl-3 w-full h-8 rounded-md border-gray-200 bg-white text-sm font-dmsans font-medium text-gray-700 shadow-sm'}}) }}
+                        {{ form_errors(form.producteur, {'attr': {'class': 'text-red-600 text-sm'}}) }}
+                    </div>
+                    <div class="col-span-6 sm:col-span-3 mt-4">
+                        {{ form_label(form.embleme, 'Emblème', {'label_attr': {'class': 'block text-sm font-dmsans font-semibold text-gray-700'}}) }}
+                        {{ form_widget(form.embleme, {'attr': {'class': 'mt-1 pl-3 w-full h-8 rounded-md border-gray-200 bg-white text-sm font-dmsans font-medium text-gray-700 shadow-sm'}}) }}
+                        {{ form_errors(form.embleme, {'attr': {'class': 'text-red-600 text-sm'}}) }}
+                    </div>
+                    <div class="col-span-6 sm:col-span-3 mt-4">
+                        {{ form_label(form.couleur, 'Couleur', {'label_attr': {'class': 'block text-sm font-dmsans font-semibold text-gray-700'}}) }}
+                        {{ form_widget(form.couleur, {'attr': {'class': 'mt-1 pl-3 w-full h-8 rounded-md border-gray-200 bg-white text-sm font-dmsans font-medium text-gray-700 shadow-sm'}}) }}
+                        {{ form_errors(form.couleur, {'attr': {'class': 'text-red-600 text-sm'}}) }}
+                    </div>
+                    <div class="col-span-6 sm:col-span-3 mt-4">
+                        {{ form_label(form.matiere, 'Matériau', {'label_attr': {'class': 'block text-sm font-dmsans font-semibold text-gray-700'}}) }}
+                        {{ form_widget(form.matiere, {'attr': {'class': 'mt-1 pl-3 w-full h-8 rounded-md border-gray-200 bg-white text-sm font-dmsans font-medium text-gray-700 shadow-sm'}}) }}
+                        {{ form_errors(form.matiere, {'attr': {'class': 'text-red-600 text-sm'}}) }}
+                    </div>
+                    <div class="col-span-6 sm:col-span-3 mt-4">
+                        {{ form_label(form.inscription, 'Inscription', {'label_attr': {'class': 'block text-sm font-dmsans font-semibold text-gray-700'}}) }}
+                        {{ form_widget(form.inscription, {'attr': {'class': 'mt-1 pl-3 w-full h-8 rounded-md border-gray-200 bg-white text-sm font-dmsans font-medium text-gray-700 shadow-sm'}}) }}
+                        {{ form_errors(form.inscription, {'attr': {'class': 'text-red-600 text-sm'}}) }}
+                    </div>
+                    <div class="col-span-6 sm:col-span-3 mt-4">
+                        {{ form_label(form.decoration, 'Décoration', {'label_attr': {'class': 'block text-sm font-dmsans font-semibold text-gray-700'}}) }}
+                        {{ form_widget(form.decoration, {'attr': {'class': 'mt-1 pl-3 w-full h-8 rounded-md border-gray-200 bg-white text-sm font-dmsans font-medium text-gray-700 shadow-sm'}}) }}
+                        {{ form_errors(form.decoration, {'attr': {'class': 'text-red-600 text-sm'}}) }}
+                    </div>
+                    <div class="col-span-6 sm:col-span-3 mt-4">
+                        {{ form_label(form.lieu, 'Lieu', {'label_attr': {'class': 'block text-sm font-dmsans font-semibold text-gray-700'}}) }}
+                        {{ form_widget(form.lieu, {'attr': {'class': 'mt-1 pl-3 w-full h-8 rounded-md border-gray-200 bg-white text-sm font-dmsans font-medium text-gray-700 shadow-sm'}}) }}
+                        {{ form_errors(form.lieu, {'attr': {'class': 'text-red-600 text-sm'}}) }}
+                    </div>
+                    <div class="col-span-6 sm:col-span-3 mt-4">
+                        {{ form_label(form.taille, 'Taille', {'label_attr': {'class': 'block text-sm font-dmsans font-semibold text-gray-700'}}) }}
+                        {{ form_widget(form.taille, {'attr': {'class': 'mt-1 pl-3 w-full h-8 rounded-md border-gray-200 bg-white text-sm font-dmsans font-medium text-gray-700 shadow-sm'}}) }}
+                        {{ form_errors(form.taille, {'attr': {'class': 'text-red-600 text-sm'}}) }}
+                    </div>
+                    <div class="col-span-6 mt-4">
+                        <label for="coffret" class="flex gap-4">
+                            {{ form_widget(form.coffret, {
+                                'id': 'coffret',
+                                'attr': {
+                                    'class': 'size-5 rounded-md border-gray-200 bg-white shadow-sm'
+                                }
+                            }) }}
+                            <span class="text-sm font-dmsans text-gray-700">La capsule fait partie d'un coffret.</span>
+                        </label>
+                    </div>
+                    <div class="col-span-6 sm:col-span-3 mt-4">
+                        {{ form_label(form.prix, 'Prix', {'label_attr': {'class': 'block text-sm font-dmsans font-semibold text-gray-700'}}) }}
+                        {{ form_widget(form.prix, {'attr': {'class': 'mt-1 pl-3 w-full h-8 rounded-md border-gray-200 bg-white text-sm font-dmsans font-medium text-gray-700 shadow-sm'}}) }}
+                        {{ form_errors(form.prix, {'attr': {'class': 'text-red-600 text-sm'}}) }}
+                    </div>
+                    <div class="col-span-6 sm:col-span-3 mt-4">
+                        {{ form_label(form.etat, 'État', {'label_attr': {'class': 'block text-sm font-dmsans font-semibold text-gray-700'}}) }}
+                        {{ form_widget(form.etat, {'attr': {'class': 'mt-1 pl-3 w-full h-8 rounded-md border-gray-200 bg-white text-sm font-dmsans font-medium text-gray-700 shadow-sm'}}) }}
+                        {{ form_errors(form.etat, {'attr': {'class': 'text-red-600 text-sm'}}) }}
+                    </div>
+                    <div class="col-span-6 sm:col-span-3 mt-4">
+                        {{ form_label(form.quantite, 'Quantité', {'label_attr': {'class': 'block text-sm font-dmsans font-semibold text-gray-700'}}) }}
+                        {{ form_widget(form.quantite, {'attr': {'class': 'mt-1 pl-3 w-full h-8 rounded-md border-gray-200 bg-white text-sm font-dmsans font-medium text-gray-700 shadow-sm'}}) }}
+                        {{ form_errors(form.quantite, {'attr': {'class': 'text-red-600 text-sm'}}) }}
+                    </div>
+                    <div class="col-span-6 mt-4">
+                        <label for="image" class="flex gap-4">
+                            {{ form_widget(form.image, {
+                                'id': 'image',
+                                'attr': {
+                                    'class': 'block text-sm font-dmsans font-semibold text-gray-700'
+                                }
+                            }) }}
+                        </label>
+                    </div>
+                    {{ form_widget(form) }}
+                    <button class="w-full inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white font-lexend transition hover:bg-indigo-700 focus:outline-none focus:ring mt-6">{{ button_label|default('Valider') }}</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 
-    {{ include('capsule/_form.html.twig') }}
-
-    <a href="{{ path('app_capsule_index') }}">back to list</a>
+    <div class="flex flex-col mx-32 mt-5 mb-12">
+        <div class="overflow-x-auto">
+            <a href="{{ path('app_capsule_index') }}" class="inline-flex items-center rounded border border-indigo-600 px-4 py-3 text-indigo-600 hover:bg-indigo-600 hover:text-white active:bg-indigo-500">
+                <i class='bx bx-arrow-back mr-3'></i>
+                <span class="text-sm font-medium font-lexend">Revenir à l'accueil</span>
+            </a>
+        </div>
+    </div>
 {% endblock %}
