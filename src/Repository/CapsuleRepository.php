@@ -19,7 +19,7 @@ class CapsuleRepository extends ServiceEntityRepository
         parent::__construct($registry, Capsule::class);
     }
 
-    public function findBySearchQuery($query)
+    public function findBySearchQuery(?string $query): array
     {
         return $this->createQueryBuilder('c')
             ->orWhere('c.producteur LIKE :query')
@@ -29,9 +29,8 @@ class CapsuleRepository extends ServiceEntityRepository
             ->orWhere('c.lieu LIKE :query')
             ->orWhere('c.taille LIKE :query')
             ->setParameter('query', '%' . $query . '%')
+            ->orderBy('c.producteur', 'ASC')
             ->getQuery()
             ->getResult();
     }
-
-    // Ajputer une fonction pour lister par producteur et ajouter un attribut render à show
 }
