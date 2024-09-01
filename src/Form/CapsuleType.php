@@ -18,9 +18,7 @@ class CapsuleType extends AbstractType
     {
         $builder
             ->add('producteur', TextType::class, ['required' => false])
-            ->add('embleme', TextType::class, ['required' => false])
             ->add('couleur', TextType::class)
-            ->add('matiere', TextType::class, ['required' => false])
             ->add('inscription', TextType::class, ['required' => false])
             ->add('decoration', TextType::class, ['required' => false])
             ->add('lieu', TextType::class, ['required' => false])

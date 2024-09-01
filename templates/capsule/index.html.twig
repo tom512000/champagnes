@@ -19,9 +19,7 @@
                             <tr>
                                 <th scope="col" class="p-5 text-left whitespace-nowrap text-sm leading-6 font-dmsans font-medium text-gray-400">Image</th>
                                 <th scope="col" class="p-5 text-left whitespace-nowrap text-sm leading-6 font-dmsans font-medium text-gray-400">Producteur</th>
-                                <th scope="col" class="p-5 text-left whitespace-nowrap text-sm leading-6 font-dmsans font-medium text-gray-400">Emblème</th>
                                 <th scope="col" class="p-5 text-left whitespace-nowrap text-sm leading-6 font-dmsans font-medium text-gray-400">Couleur</th>
-                                <th scope="col" class="p-5 text-left whitespace-nowrap text-sm leading-6 font-dmsans font-medium text-gray-400">Matériau</th>
                                 <th scope="col" class="p-5 text-left whitespace-nowrap text-sm leading-6 font-dmsans font-medium text-gray-400">Inscription</th>
                                 <th scope="col" class="p-5 text-left whitespace-nowrap text-sm leading-6 font-dmsans font-medium text-gray-400">Décoration</th>
                                 <th scope="col" class="p-5 text-left whitespace-nowrap text-sm leading-6 font-dmsans font-medium text-gray-400">Lieu</th>
@@ -52,21 +50,7 @@
                                             <i class='bx bx-x text-xl text-red-600'></i>
                                         {% endif %}
                                     </td>
-                                    <td class="p-5 text-sm leading-6 font-normal font-lexend text-gray-900">
-                                        {% if capsule.embleme is not null %}
-                                            {{ capsule.embleme }}
-                                        {% else %}
-                                            <i class='bx bx-x text-xl text-red-600'></i>
-                                        {% endif %}
-                                    </td>
                                     <td class="p-5 whitespace-nowrap text-sm leading-6 font-normal font-lexend text-gray-900">{{ capsule.couleur }}</td>
-                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-normal font-lexend text-gray-900">
-                                        {% if capsule.matiere is not null %}
-                                            {{ capsule.matiere }}
-                                        {% else %}
-                                            <i class='bx bx-x text-xl text-red-600'></i>
-                                        {% endif %}
-                                    </td>
                                     <td class="p-5 text-sm leading-6 font-normal font-lexend text-gray-900">
                                         {% if capsule.inscription is not null %}
                                             {{ capsule.inscription }}

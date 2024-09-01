@@ -23,9 +23,7 @@ class CapsuleRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->orWhere('c.producteur LIKE :query')
-            ->orWhere('c.embleme LIKE :query')
             ->orWhere('c.couleur LIKE :query')
-            ->orWhere('c.matiere LIKE :query')
             ->orWhere('c.inscription LIKE :query')
             ->orWhere('c.decoration LIKE :query')
             ->orWhere('c.lieu LIKE :query')
@@ -34,4 +32,6 @@ class CapsuleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    // Ajputer une fonction pour lister par producteur et ajouter un attribut render à show
 }

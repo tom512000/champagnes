@@ -26,17 +26,7 @@
                         </h3>
 
                         <p class="mt-1 text-sm font-dmsans text-gray-700">
-                            {% if capsule.embleme is not null %}
-                                {{ capsule.embleme }} -
-                            {% else %}
-                                Pas d'emblème -
-                            {% endif %}
                             {{ capsule.couleur }} -
-                            {% if capsule.matiere is not null %}
-                                {{ capsule.matiere }} -
-                            {% else %}
-                                Pas de matériau -
-                            {% endif %}
                             {% if capsule.inscription is not null %}
                                 {{ capsule.inscription }} -
                             {% else %}

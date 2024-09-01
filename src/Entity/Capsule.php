@@ -17,13 +17,7 @@ class Capsule
     private ?string $producteur = "";
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $embleme = "";
-
-    #[ORM\Column(length: 255, nullable: true)]
     private ?string $couleur = "";
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $matiere = "";
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $inscription = "";
@@ -69,18 +63,6 @@ class Capsule
         return $this;
     }
 
-    public function getEmbleme(): ?string
-    {
-        return $this->embleme;
-    }
-
-    public function setEmbleme(?string $embleme): static
-    {
-        $this->embleme = $embleme ?: null;
-
-        return $this;
-    }
-
     public function getCouleur(): ?string
     {
         return $this->couleur;
@@ -89,18 +71,6 @@ class Capsule
     public function setCouleur(?string $couleur): static
     {
         $this->couleur = $couleur ?: null;
-
-        return $this;
-    }
-
-    public function getMatiere(): ?string
-    {
-        return $this->matiere;
-    }
-
-    public function setMatiere(?string $matiere): static
-    {
-        $this->matiere = $matiere ?: null;
 
         return $this;
     }
