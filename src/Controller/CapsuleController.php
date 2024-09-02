@@ -7,7 +7,12 @@ use App\Form\CapsuleType;
 use App\Repository\CapsuleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use Symfony\Component\Form\Exception\LogicException;
+use Symfony\Component\Form\Exception\OutOfBoundsException;
+use Symfony\Component\Form\Exception\RuntimeException;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,17 +29,34 @@ class CapsuleController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @throws BadRequestException
+     */
     #[Route('/', name: 'app_capsule_index', methods: ['GET'])]
     public function index(CapsuleRepository $capsuleRepository, Request $request): Response
     {
         $query = $request->query->get('search');
         $capsules = $capsuleRepository->findBySearchQuery($query);
 
+        $totalCapsules = array_reduce($capsules, function($carry, $capsule) {
+            return $carry + $capsule->getQuantite();
+        }, 0);
+
+        $totalVarietes = count($capsules);
+
         return $this->render('capsule/index.html.twig', [
             'capsules' => $capsules,
+            'totalCapsules' => $totalCapsules,
+            'totalVarietes' => $totalVarietes,
         ]);
     }
 
+    /**
+     * @throws OutOfBoundsException
+     * @throws RuntimeException
+     * @throws ServiceNotFoundException
+     * @throws LogicException
+     */
     #[Route('/new', name: 'app_capsule_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
@@ -65,6 +87,12 @@ class CapsuleController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws OutOfBoundsException
+     * @throws RuntimeException
+     * @throws ServiceNotFoundException
+     * @throws LogicException
+     */
     #[Route('/{id}/edit', name: 'app_capsule_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Capsule $capsule, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
@@ -85,6 +113,9 @@ class CapsuleController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws BadRequestException
+     */
     #[Route('/{id}', name: 'app_capsule_delete', methods: ['POST'])]
     public function delete(Request $request, Capsule $capsule, EntityManagerInterface $entityManager): Response
     {
@@ -101,6 +132,8 @@ class CapsuleController extends AbstractController
      * @param SluggerInterface $slugger
      * @param Capsule $capsule
      * @return void
+     * @throws OutOfBoundsException
+     * @throws ServiceNotFoundException|RuntimeException
      */
     public function extracted(FormInterface $form, SluggerInterface $slugger, Capsule $capsule): void
     {
