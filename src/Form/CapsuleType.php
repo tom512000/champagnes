@@ -8,7 +8,6 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
@@ -24,9 +23,24 @@ class CapsuleType extends AbstractType
             ->add('lieu', TextType::class, ['required' => false])
             ->add('taille', TextType::class)
             ->add('coffret', CheckboxType::class, ['required' => false])
-            ->add('prix', NumberType::class, ['scale' => 2, 'required' => false])
-            ->add('etat', TextType::class)
-            ->add('quantite', IntegerType::class)
+            ->add('prix', IntegerType::class, [
+                'attr' => [
+                    'min' => 0.00,
+                    'step' => 0.01
+                ],
+                'required' => false
+            ])
+            ->add('etat', IntegerType::class, [
+                'attr' => [
+                    'min' => 1,
+                    'max' => 5
+                ]
+            ])
+            ->add('quantite', IntegerType::class, [
+                'attr' => [
+                    'min' => 1
+                ]
+            ])
             ->add('image', FileType::class, [
                 'label' => 'Image file',
                 'mapped' => false,
