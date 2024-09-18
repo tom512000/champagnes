@@ -39,10 +39,10 @@
                             {% endif %}
                             Taille {{ capsule.taille }} -
                             {{ capsule.coffret ? 'Dans un coffret' : 'Pas dans un coffret' }} -
-                            {% if capsule.prix != 0 %}
-                                {{ capsule.prix }} euro(s) -
+                            {% if capsule.prix is null or capsule.prix == 0 %}
+                                Pas à vendre -
                             {% else %}
-                                Pas de prix -
+                                {{ capsule.prix }} &#8364; -
                             {% endif %}
                             État {{ capsule.etat }}.
                         </p>

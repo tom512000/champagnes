@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Capsule;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,10 +24,10 @@ class CapsuleType extends AbstractType
             ->add('lieu', TextType::class, ['required' => false])
             ->add('taille', TextType::class)
             ->add('coffret', CheckboxType::class, ['required' => false])
-            ->add('prix', IntegerType::class, [
+            ->add('prix', NumberType::class, [
                 'attr' => [
                     'min' => 0.00,
-                    'step' => 0.01
+                    'step' => 0.5
                 ],
                 'required' => false
             ])

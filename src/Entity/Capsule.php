@@ -35,13 +35,13 @@ class Capsule
     private bool $coffret = false; // true ou false
 
     #[ORM\Column(type: "float", scale: 2, nullable: true)]
-    private ?float $prix = 0.0;
+    private ?float $prix = 0;
 
     #[ORM\Column(type: "integer", length: 1)]
     private int $etat; // Entre 1 et 5
 
     #[ORM\Column(type: "integer", length: 1)]
-    private int $quantite;
+    private int $quantite = 1;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image;
@@ -135,7 +135,7 @@ class Capsule
         return $this;
     }
 
-    public function getPrix(): float
+    public function getPrix(): ?float
     {
         return $this->prix;
     }
